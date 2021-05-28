@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:uas_mobile/auth/login_page.dart';
+import 'package:uas_mobile/home.dart';
 
 class Started extends StatefulWidget {
   @override
@@ -16,7 +17,7 @@ class StartedState extends State<Started> {
         child: Column(
           children: <Widget>[
             Container(
-              margin: EdgeInsets.only(top: 50),
+              margin: EdgeInsets.only(top: 100),
               child: Image.asset(
                 'images/jump1.jpg',
                 height: 250,
@@ -24,7 +25,7 @@ class StartedState extends State<Started> {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(top: 50, left: 145),
+              margin: EdgeInsets.only(top: 50, left: 110),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -49,7 +50,7 @@ class StartedState extends State<Started> {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(left: 137),
+              margin: EdgeInsets.only(left: 90),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 // crossAxisAlignment: CrossAxisAlignment.start,
@@ -100,7 +101,7 @@ class StartedState extends State<Started> {
               ),
             ),
             Container(
-              margin: EdgeInsets.all(30),
+              margin: EdgeInsets.only(top: 70),
               width: 270,
               height: 55,
               decoration: BoxDecoration(
@@ -123,11 +124,11 @@ class StartedState extends State<Started> {
                       color: Colors.white),
                 ),
                 // untuk berpindah ke halaman selanjutnya
-                onPressed: () {},
-                // onPressed: () async {
-                //   Navigator.of(context)
-                //       .push(MaterialPageRoute(builder: (context) => Home()));
-                // },
+                // onPressed: () {},
+                onPressed: () async {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) => Home()));
+                },
               ),
             ),
           ],

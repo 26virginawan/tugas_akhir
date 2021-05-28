@@ -1,5 +1,7 @@
 //kode utama Aplikasi tampilan awal
 import 'package:flutter/material.dart';
+import 'package:uas_mobile/home.dart';
+// import 'package:uas_mobile/home.dart';
 import 'package:uas_mobile/pages/started.dart'; //package letak folder Anda
 
 void main() => runApp(MyApp());
