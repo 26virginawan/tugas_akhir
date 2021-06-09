@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:uas_mobile/auth/login_page.dart';
 import 'package:uas_mobile/home.dart';
+import 'package:uas_mobile/res/custom_colors.dart';
 
 class Started extends StatefulWidget {
   @override
@@ -25,7 +26,7 @@ class StartedState extends State<Started> {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(top: 50, left: 110),
+              margin: EdgeInsets.only(top: 50, left: 90),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -43,14 +44,14 @@ class StartedState extends State<Started> {
                     'Awesome',
                     style: GoogleFonts.poppins(
                         fontSize: 25,
-                        color: Colors.blueAccent,
+                        color: CustomColors.firebaseGrey,
                         fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
             ),
             Container(
-              margin: EdgeInsets.only(left: 90),
+              margin: EdgeInsets.only(left: 70),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 // crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,7 +60,7 @@ class StartedState extends State<Started> {
                     'Branded',
                     style: GoogleFonts.poppins(
                         fontSize: 28,
-                        color: Colors.blueAccent,
+                        color: CustomColors.firebaseGrey,
                         fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
@@ -101,7 +102,7 @@ class StartedState extends State<Started> {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(top: 70),
+              margin: EdgeInsets.only(top: 40),
               width: 270,
               height: 55,
               decoration: BoxDecoration(
@@ -115,7 +116,7 @@ class StartedState extends State<Started> {
                       color: Colors.grey.withOpacity(0.2),
                       width: 1,
                     )),
-                color: Colors.blueAccent,
+                color: CustomColors.firebaseGrey,
                 child: Text(
                   "Lets Get Started",
                   style: GoogleFonts.poppins(
@@ -126,8 +127,8 @@ class StartedState extends State<Started> {
                 // untuk berpindah ke halaman selanjutnya
                 // onPressed: () {},
                 onPressed: () async {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => Home()));
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => LoginPage()));
                 },
               ),
             ),

@@ -1,8 +1,6 @@
-//kode utama Aplikasi tampilan awal
 import 'package:flutter/material.dart';
-import 'package:uas_mobile/home.dart';
-// import 'package:uas_mobile/home.dart';
-import 'package:uas_mobile/pages/started.dart'; //package letak folder Anda
+import 'package:uas_mobile/pages/started.dart';
+import 'package:uas_mobile/res/custom_colors.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,7 +11,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Tambahkan Item',
       theme: ThemeData(
-        primaryColor: Colors.white,
+        primaryColor: CustomColors.background,
       ),
       home: Started(),
     );

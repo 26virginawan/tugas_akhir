@@ -7,6 +7,8 @@ final GoogleSignIn googleSignIn = GoogleSignIn();
 String name;
 String email;
 String imageUrl;
+String userUid;
+
 Future<String> signInWithGoogle() async {
   await Firebase.initializeApp();
   final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
@@ -19,6 +21,7 @@ Future<String> signInWithGoogle() async {
   final UserCredential authResult =
       await _auth.signInWithCredential(credential);
   final User user = authResult.user;
+  userUid = user.uid;
   if (user != null) {
 // Checking if email and name is null
     assert(user.email != null);
@@ -41,43 +44,69 @@ Future<String> signInWithGoogle() async {
   return null;
 }
 
-Future<User> signUp(String name, String email, String pass) async {
-  final FirebaseAuth auth = FirebaseAuth.instance;
+Future<User> signUpWithEmail(String name, String email, String password) async {
   await Firebase.initializeApp();
-
-  UserCredential authResult =
-      await _auth.createUserWithEmailAndPassword(email: email, password: pass);
-  User user = authResult.user;
-
-  if (user != null) {
+  try {
+    UserCredential authResult = await FirebaseAuth.instance
+        .createUserWithEmailAndPassword(email: email, password: password);
+    User user = authResult.user;
+    if (user != null) {
 // Checking if email and name is null
-    assert(user.email != null);
-    email = user.email;
-    return user;
+      assert(user.email != null);
+      email = user.email;
+      assert(name != null);
+      name = name;
+
+      return user;
+    }
+    return null;
+  } catch (e) {
+    print(e.toString());
+    return null;
   }
-  return null;
 }
 
-Future<User> signIn(String email, String pass) async {
-  final FirebaseAuth auth = FirebaseAuth.instance;
+// Future<User> signUp(String name, String email, String pass) async {
+//   final FirebaseAuth auth = FirebaseAuth.instance;
+//   await Firebase.initializeApp();
+
+//   UserCredential authResult =
+//       await _auth.createUserWithEmailAndPassword(email: email, password: pass);
+//   User user = authResult.user;
+
+//   if (user != null) {
+// // Checking if email and name is null
+//     assert(user.email != null);
+//     email = user.email;
+//     return user;
+//   }
+//   return null;
+// }
+
+Future<User> signInWithEmail(String email, String pass) async {
   await Firebase.initializeApp();
-
-  UserCredential authResult =
-      await _auth.signInWithEmailAndPassword(email: email, password: pass);
-  User user = authResult.user;
-
-  if (user != null) {
+  try {
+    UserCredential authResult = await FirebaseAuth.instance
+        .signInWithEmailAndPassword(email: email, password: pass);
+    User user = authResult.user;
+    if (user != null) {
 // Checking if email and name is null
-    assert(user.email != null);
-    email = user.email;
-    return user;
+      assert(user.email != null);
+      email = email;
+
+      return user;
+    }
+    return null;
+  } catch (e) {
+    print(e.toString());
+    return null;
   }
-  return null;
 }
 
 Future<void> signOutGoogle() async {
   await googleSignIn.signOut();
   print("User Signed Out");
+  _auth.signOut();
 }
 
 Future<void> signOut() async {
