@@ -15,11 +15,12 @@ For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
-![started](images/started.jpg)
-![login](images/login.jpg)
-![register](images/register.jpg)
-![home](images/home.jpg)
-![drawer](images/Drawer.jpg)
-![list](images/listitem.jpg)
-![form](images/formitem.jpg)
-![update](images/updateitem.jpg)
+![started](images/started.jpeg)
+![login](images/login.jpeg)
+![register](images/register.jpeg)
+![home](images/home.jpeg)
+![drawer](images/Drawer.jpeg)
+![list](images/listitem.jpeg)
+![form](images/formitem.jpeg)
+![update](images/updateitem.jpeg)
+![home](images/home.jpeg)
