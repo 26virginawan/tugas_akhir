@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:uas_mobile/custom/custom_colors.dart';
-import 'package:uas_mobile/widgets/add_item_form.dart';
+import 'package:uas_mobile/widgets/add_order_form.dart';
 import 'package:uas_mobile/widgets/app_bar_title.dart';
 
-class AddScreen extends StatelessWidget {
-  final FocusNode _titleFocusNode = FocusNode();
-  final FocusNode _descriptionFocusNode = FocusNode();
+class AddScreen2 extends StatelessWidget {
+  final FocusNode _brandFocusNode = FocusNode();
+  final FocusNode _colorFocusNode = FocusNode();
+  final FocusNode _stokFocusNode = FocusNode();
+  final FocusNode _priceFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        _titleFocusNode.unfocus();
-        _descriptionFocusNode.unfocus();
+        _brandFocusNode.unfocus();
+        _colorFocusNode.unfocus();
+        _stokFocusNode.unfocus();
+        _priceFocusNode.unfocus();
       },
       child: Scaffold(
         backgroundColor: CustomColors.background,
@@ -29,9 +33,11 @@ class AddScreen extends StatelessWidget {
                 right: 16.0,
                 bottom: 20.0,
               ),
-              child: AddItemForm(
-                titleFocusNode: _titleFocusNode,
-                descriptionFocusNode: _descriptionFocusNode,
+              child: AddOrderForm(
+                brandFocusNode: _brandFocusNode,
+                colorFocusNode: _colorFocusNode,
+                stokFocusNode: _stokFocusNode,
+                priceFocusNode: _priceFocusNode,
               ),
             ),
           ),

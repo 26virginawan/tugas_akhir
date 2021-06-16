@@ -1,31 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:uas_mobile/custom/custom_colors.dart';
-import 'package:uas_mobile/utils/database.dart';
+import 'package:uas_mobile/utils/database2.dart';
 import 'package:uas_mobile/utils/validator.dart';
 
 import 'custom_form_field.dart';
 
-class AddItemForm extends StatefulWidget {
-  final FocusNode titleFocusNode;
-  final FocusNode descriptionFocusNode;
+// import 'custom_form_field.dart';
 
-  const AddItemForm({
-    this.titleFocusNode,
-    this.descriptionFocusNode,
+class AddOrderForm extends StatefulWidget {
+  final FocusNode brandFocusNode;
+  final FocusNode colorFocusNode;
+  final FocusNode stokFocusNode;
+  final FocusNode priceFocusNode;
+
+  const AddOrderForm({
+    this.brandFocusNode,
+    this.colorFocusNode,
+    this.stokFocusNode,
+    this.priceFocusNode,
   });
 
   @override
-  _AddItemFormState createState() => _AddItemFormState();
+  _AddOrderFormState createState() => _AddOrderFormState();
 }
 
-class _AddItemFormState extends State<AddItemForm> {
+class _AddOrderFormState extends State<AddOrderForm> {
   final _addItemFormKey = GlobalKey<FormState>();
 
   bool _isProcessing = false;
 
-  final TextEditingController _titleController = TextEditingController();
-  final TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _brandController = TextEditingController();
+  final TextEditingController _colorController = TextEditingController();
+  final TextEditingController _stokController = TextEditingController();
+  final TextEditingController _priceController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -54,19 +62,19 @@ class _AddItemFormState extends State<AddItemForm> {
                 SizedBox(height: 8.0),
                 CustomFormField(
                   isLabelEnabled: false,
-                  controller: _titleController,
-                  focusNode: widget.titleFocusNode,
+                  controller: _brandController,
+                  focusNode: widget.brandFocusNode,
                   keyboardType: TextInputType.text,
                   inputAction: TextInputAction.next,
                   validator: (value) => Validator.validateField(
                     value: value,
                   ),
-                  label: 'Title',
-                  hint: 'Enter your note title',
+                  label: 'brand',
+                  hint: 'Enter your brand',
                 ),
                 SizedBox(height: 24.0),
                 Text(
-                  'Type',
+                  'color',
                   style: GoogleFonts.poppins(
                       fontSize: 22,
                       fontWeight: FontWeight.w600,
@@ -76,17 +84,60 @@ class _AddItemFormState extends State<AddItemForm> {
                 SizedBox(height: 8.0),
                 CustomFormField(
                   isLabelEnabled: false,
-                  controller: _descriptionController,
-                  focusNode: widget.descriptionFocusNode,
+                  controller: _colorController,
+                  focusNode: widget.colorFocusNode,
                   keyboardType: TextInputType.text,
+                  inputAction: TextInputAction.next,
+                  validator: (value) => Validator.validateField(
+                    value: value,
+                  ),
+                  label: 'color',
+                  hint: 'Enter your color',
+                ),
+                SizedBox(height: 24.0),
+                Text(
+                  'stok',
+                  style: GoogleFonts.poppins(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 1,
+                      color: CustomColors.text),
+                ),
+                SizedBox(height: 8.0),
+                CustomFormField(
+                  isLabelEnabled: false,
+                  controller: _stokController,
+                  focusNode: widget.stokFocusNode,
+                  keyboardType: TextInputType.number,
+                  inputAction: TextInputAction.next,
+                  validator: (value) => Validator.validateField(
+                    value: value,
+                  ),
+                  label: 'stok',
+                  hint: 'Enter your stok',
+                ),
+                SizedBox(height: 24.0),
+                Text(
+                  'price',
+                  style: GoogleFonts.poppins(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 1,
+                      color: CustomColors.text),
+                ),
+                SizedBox(height: 8.0),
+                CustomFormField(
+                  isLabelEnabled: false,
+                  controller: _priceController,
+                  focusNode: widget.priceFocusNode,
+                  keyboardType: TextInputType.number,
                   inputAction: TextInputAction.done,
                   validator: (value) => Validator.validateField(
                     value: value,
                   ),
-                  label: 'Description',
-                  hint: 'Enter your note description',
+                  label: 'price',
+                  hint: 'Enter your price',
                 ),
-                SizedBox(height: 24.0),
               ],
             ),
           ),
@@ -113,17 +164,21 @@ class _AddItemFormState extends State<AddItemForm> {
                       ),
                     ),
                     onPressed: () async {
-                      widget.titleFocusNode.unfocus();
-                      widget.descriptionFocusNode.unfocus();
+                      widget.brandFocusNode.unfocus();
+                      widget.colorFocusNode.unfocus();
+                      widget.stokFocusNode.unfocus();
+                      widget.priceFocusNode.unfocus();
 
                       if (_addItemFormKey.currentState.validate()) {
                         setState(() {
                           _isProcessing = true;
                         });
 
-                        await Database.addItem(
-                          title: _titleController.text,
-                          description: _descriptionController.text,
+                        await Database2.addItem(
+                          brand: _brandController.text,
+                          color: _colorController.text,
+                          stok: _stokController.text,
+                          price: _priceController.text,
                         );
 
                         setState(() {
@@ -136,7 +191,7 @@ class _AddItemFormState extends State<AddItemForm> {
                     child: Padding(
                       padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
                       child: Text(
-                        'ADD ITEM',
+                        'ADD DETAIL',
                         style: GoogleFonts.poppins(
                           fontSize: 22,
                           fontWeight: FontWeight.w700,

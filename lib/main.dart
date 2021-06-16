@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uas_mobile/pages/started.dart';
-import 'package:uas_mobile/res/custom_colors.dart';
+import 'package:uas_mobile/custom/custom_colors.dart';
 
 void main() => runApp(MyApp());
 

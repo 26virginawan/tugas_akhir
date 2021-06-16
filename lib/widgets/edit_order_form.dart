@@ -1,47 +1,62 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:uas_mobile/custom/custom_colors.dart';
-import 'package:uas_mobile/utils/database.dart';
+import 'package:uas_mobile/utils/database2.dart';
 import 'package:uas_mobile/utils/validator.dart';
 
 import 'custom_form_field.dart';
 
-class EditItemForm extends StatefulWidget {
-  final FocusNode titleFocusNode;
-  final FocusNode descriptionFocusNode;
-  final String currentTitle;
-  final String currentDescription;
+class EditOrderForm extends StatefulWidget {
+  final FocusNode brandFocusNode;
+  final FocusNode colorFocusNode;
+  final FocusNode stokFocusNode;
+  final FocusNode priceFocusNode;
+  final String currentBrand;
+  final String currentColor;
+  final String currentStok;
+  final String currentprice;
   final String documentId;
 
-  const EditItemForm({
-    this.titleFocusNode,
-    this.descriptionFocusNode,
-    this.currentTitle,
-    this.currentDescription,
+  const EditOrderForm({
+    this.brandFocusNode,
+    this.colorFocusNode,
+    this.stokFocusNode,
+    this.priceFocusNode,
+    this.currentBrand,
+    this.currentColor,
+    this.currentStok,
+    this.currentprice,
     this.documentId,
   });
 
   @override
-  _EditItemFormState createState() => _EditItemFormState();
+  _EditOrderFormState createState() => _EditOrderFormState();
 }
 
-class _EditItemFormState extends State<EditItemForm> {
+class _EditOrderFormState extends State<EditOrderForm> {
   final _editItemFormKey = GlobalKey<FormState>();
 
   bool _isProcessing = false;
 
-  TextEditingController _titleController;
-  TextEditingController _descriptionController;
+  TextEditingController _brandController;
+  TextEditingController _colorController;
+  TextEditingController _stokController;
+  TextEditingController _priceController;
 
   @override
   void initState() {
-    _titleController = TextEditingController(
-      text: widget.currentTitle,
+    _brandController = TextEditingController(
+      text: widget.currentBrand,
     );
 
-    _descriptionController = TextEditingController(
-      text: widget.currentDescription,
+    _colorController = TextEditingController(
+      text: widget.currentColor,
+    );
+
+    _stokController = TextEditingController(text: widget.currentStok);
+
+    _priceController = TextEditingController(
+      text: widget.currentprice,
     );
     super.initState();
   }
@@ -73,19 +88,19 @@ class _EditItemFormState extends State<EditItemForm> {
                 SizedBox(height: 8.0),
                 CustomFormField(
                   isLabelEnabled: false,
-                  controller: _titleController,
-                  focusNode: widget.titleFocusNode,
+                  controller: _brandController,
+                  focusNode: widget.brandFocusNode,
                   keyboardType: TextInputType.text,
                   inputAction: TextInputAction.next,
                   validator: (value) => Validator.validateField(
                     value: value,
                   ),
-                  label: 'Title',
-                  hint: 'Enter your note title',
+                  label: 'brand',
+                  hint: 'Enter your brand',
                 ),
                 SizedBox(height: 24.0),
                 Text(
-                  'Type',
+                  'Color',
                   style: GoogleFonts.poppins(
                       fontSize: 22,
                       fontWeight: FontWeight.w600,
@@ -95,17 +110,38 @@ class _EditItemFormState extends State<EditItemForm> {
                 SizedBox(height: 8.0),
                 CustomFormField(
                   isLabelEnabled: false,
-                  controller: _descriptionController,
-                  focusNode: widget.descriptionFocusNode,
+                  controller: _colorController,
+                  focusNode: widget.colorFocusNode,
                   keyboardType: TextInputType.text,
                   inputAction: TextInputAction.next,
                   validator: (value) => Validator.validateField(
                     value: value,
                   ),
-                  label: 'Description',
-                  hint: 'Enter your note description',
+                  label: 'color',
+                  hint: 'Enter your Color',
                 ),
                 SizedBox(height: 24.0),
+                Text(
+                  'Stok',
+                  style: GoogleFonts.poppins(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 1,
+                      color: CustomColors.text),
+                ),
+                SizedBox(height: 8.0),
+                CustomFormField(
+                  isLabelEnabled: false,
+                  controller: _stokController,
+                  focusNode: widget.stokFocusNode,
+                  keyboardType: TextInputType.number,
+                  inputAction: TextInputAction.next,
+                  validator: (value) => Validator.validateField(
+                    value: value,
+                  ),
+                  label: 'stok',
+                  hint: 'Enter your Stok',
+                ),
                 Text(
                   'Price',
                   style: GoogleFonts.poppins(
@@ -113,6 +149,19 @@ class _EditItemFormState extends State<EditItemForm> {
                       fontWeight: FontWeight.w600,
                       letterSpacing: 1,
                       color: CustomColors.text),
+                ),
+                SizedBox(height: 8.0),
+                CustomFormField(
+                  isLabelEnabled: false,
+                  controller: _priceController,
+                  focusNode: widget.priceFocusNode,
+                  keyboardType: TextInputType.text,
+                  inputAction: TextInputAction.done,
+                  validator: (value) => Validator.validateField(
+                    value: value,
+                  ),
+                  label: 'Price',
+                  hint: 'Enter your price',
                 ),
               ],
             ),
@@ -140,19 +189,22 @@ class _EditItemFormState extends State<EditItemForm> {
                       ),
                     ),
                     onPressed: () async {
-                      widget.titleFocusNode.unfocus();
-                      widget.descriptionFocusNode.unfocus();
+                      widget.brandFocusNode.unfocus();
+                      widget.colorFocusNode.unfocus();
+                      widget.stokFocusNode.unfocus();
+                      widget.priceFocusNode.unfocus();
 
                       if (_editItemFormKey.currentState.validate()) {
                         setState(() {
                           _isProcessing = true;
                         });
 
-                        await Database.updateItem(
-                          docId: widget.documentId,
-                          title: _titleController.text,
-                          description: _descriptionController.text,
-                        );
+                        await Database2.updateItem(
+                            docId: widget.documentId,
+                            brand: _brandController.text,
+                            color: _colorController.text,
+                            stok: _stokController.text,
+                            price: _priceController.text);
 
                         setState(() {
                           _isProcessing = false;
@@ -164,7 +216,7 @@ class _EditItemFormState extends State<EditItemForm> {
                     child: Padding(
                       padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
                       child: Text(
-                        'UPDATE ITEM',
+                        'UPDATE DETAIL',
                         style: GoogleFonts.poppins(
                           fontSize: 22,
                           fontWeight: FontWeight.w700,

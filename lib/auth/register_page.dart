@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:uas_mobile/auth/login_page.dart';
-import 'package:uas_mobile/auth/register_page.dart';
-// import 'package:tugas_firebase/auth_services.dart';
 import 'package:uas_mobile/auth/sign_in.dart';
-import 'package:uas_mobile/contoh_sederhana/main_page.dart';
-// import 'package:uas_mobile/auth/first_screen.dart';
-
-import 'package:uas_mobile/home.dart';
-import 'package:uas_mobile/res/custom_colors.dart';
+import 'package:uas_mobile/custom/custom_colors.dart';
+import 'package:uas_mobile/screens/dashboard_screen.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -26,7 +21,7 @@ class _RegisterPageState extends State<RegisterPage> {
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.all(25),
-          color: Colors.white,
+          color: CustomColors.background,
           child: Center(
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -154,7 +149,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) {
-                                return Home();
+                                return DashboardScreen();
                               },
                             ),
                           );
@@ -166,47 +161,9 @@ class _RegisterPageState extends State<RegisterPage> {
                 SizedBox(
                   height: 15,
                 ),
-                // Text("tes"),
-                // _signInButton(),
                 SizedBox(
                   height: 15,
                 ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                //   children: [
-                //     TextButton(
-                //       child: Container(
-                //         height: 40,
-                //         // width: 50,
-                //         // color: Colors.blue,
-                //         child: Image.asset('images/google.png'),
-                //       ),
-                //       onPressed: () {
-                //         signInWithGoogle().then((result) {
-                //           if (result != null) {
-                //             Navigator.of(context).push(
-                //               MaterialPageRoute(
-                //                 builder: (context) {
-                //                   return Home();
-                //                 },
-                //               ),
-                //             );
-                //           }
-                //         });
-                //       },
-                //     ),
-                //     Container(
-                //       height: 40,
-                //       // width: 90,
-                //       child: Image.asset('images/fb.png'),
-                //     ),
-                //     Container(
-                //       height: 40,
-                //       // width: 90,
-                //       child: Image.asset('images/line.png'),
-                //     ),
-                //   ],
-                // ),
                 SizedBox(
                   height: 10,
                 ),
@@ -243,48 +200,6 @@ class _RegisterPageState extends State<RegisterPage> {
               ],
             ),
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget _signInButton() {
-    return OutlineButton(
-      splashColor: Colors.grey,
-      onPressed: () {
-        signInWithGoogle().then((result) {
-          if (result != null) {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) {
-                  return MainPage();
-                },
-              ),
-            );
-          }
-        });
-      },
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-      highlightElevation: 0,
-      borderSide: BorderSide(color: Colors.lightBlue),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            // Image(image: AssetImage("assets/google_logo.png"), height: 35.0),
-            Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: Text(
-                'Sign in with Google',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.grey,
-                ),
-              ),
-            )
-          ],
         ),
       ),
     );

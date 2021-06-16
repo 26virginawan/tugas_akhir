@@ -1,256 +1,216 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'dart:async';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:uas_mobile/auth/sign_in.dart';
-import 'package:uas_mobile/pages/started.dart';
+import 'package:uas_mobile/screens/edit_screen2.dart';
+import 'package:uas_mobile/custom/custom_colors.dart';
+import 'package:uas_mobile/utils/database2.dart';
 
-class Detail extends StatefulWidget {
-  @override
-  DetailState createState() => DetailState();
-}
-
-class DetailState extends State<Detail> {
+class Detail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          padding: EdgeInsets.only(left: 25, top: 20),
-          icon: Icon(
-            Icons.arrow_back_ios,
-            color: Colors.black87,
-            size: 30,
+    return StreamBuilder<QuerySnapshot>(
+      stream: Database2.readItems(),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return Text('Something went wrong');
+        } else if (snapshot.hasData || snapshot.data != null) {
+          return ListView.separated(
+            separatorBuilder: (context, index) => SizedBox(height: 16.0),
+            itemCount: snapshot.data.docs.length,
+            itemBuilder: (context, index) {
+              var noteInfo = snapshot.data.docs[index].data();
+              String docID = snapshot.data.docs[index].id;
+              String brand = noteInfo['brand'];
+              String color = noteInfo['color'];
+              String stok = noteInfo['stok'];
+              String price = noteInfo['price'];
+
+              return Ink(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Container(
+                    margin: EdgeInsets.only(left: 20, top: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                padding: EdgeInsets.only(left: 15, top: 10),
+                                margin:
+                                    EdgeInsets.only(top: 5, bottom: 5, left: 5),
+                                height: 360,
+                                width: 300,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.3),
+                                        spreadRadius: 1,
+                                        blurRadius: 3,
+                                        offset: Offset(0, 1),
+                                      ),
+                                    ]),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(height: 10),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          brand,
+                                          style: GoogleFonts.poppins(
+                                              color: CustomColors.text,
+                                              fontSize: 25,
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                        Container(
+                                          height: 35,
+                                          width: 75,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                            color: CustomColors.firebaseGrey,
+                                          ),
+                                          margin: EdgeInsets.only(right: 20),
+                                          child: TextButton(
+                                              child: Text(
+                                                "Edit",
+                                                style: GoogleFonts.poppins(
+                                                    color:
+                                                        CustomColors.background,
+                                                    fontSize: 13,
+                                                    fontWeight:
+                                                        FontWeight.w600),
+                                              ),
+                                              onPressed: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        EditScreen2(
+                                                      currentBrand: brand,
+                                                      currentColor: color,
+                                                      currentStok: stok,
+                                                      currentPrice: price,
+                                                      documentId: docID,
+                                                    ),
+                                                  ),
+                                                );
+                                              }),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Image.asset(
+                                      'images/nike3q.png',
+                                      height: 150,
+                                      width: 250,
+                                    ),
+                                    SizedBox(
+                                      height: 50,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Color",
+                                              style: GoogleFonts.poppins(
+                                                  color: CustomColors.text,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                            Text(
+                                              color,
+                                              style: GoogleFonts.poppins(
+                                                  color: CustomColors.text,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                          ],
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Stok",
+                                              style: GoogleFonts.poppins(
+                                                  color: CustomColors.text,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                            Text(
+                                              stok,
+                                              style: GoogleFonts.poppins(
+                                                  color: CustomColors.text,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                          ],
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Price",
+                                              style: GoogleFonts.poppins(
+                                                  color: CustomColors.text,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                            Text(
+                                              "Rp. $price",
+                                              style: GoogleFonts.poppins(
+                                                  color: CustomColors.text,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 25,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            },
+          );
+        }
+
+        return Center(
+          child: CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(
+              CustomColors.firebaseOrange,
+            ),
           ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        elevation: 0,
-        actions: <Widget>[
-          IconButton(
-              padding: EdgeInsets.only(right: 25, top: 25),
-              icon: Icon(Icons.search),
-              iconSize: 40,
-              onPressed: () {},
-              color: Colors.black87),
-        ],
-      ),
-      backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Container(
-          // padding: EdgeInsets.only(left: 40, top: 35),
-          margin: EdgeInsets.only(left: 25, right: 25),
-          child: Column(
-            children: [
-              Container(
-                padding: EdgeInsets.only(left: 50),
-                child: Image.asset(
-                  'images/nike3q.png',
-                  height: 250,
-                  width: 250,
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Nike Air Max 70",
-                    style: GoogleFonts.poppins(
-                        color: Colors.black87,
-                        fontSize: 30,
-                        fontWeight: FontWeight.w600),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                // padding: EdgeInsets.only(right: 320),
-                child: Text(
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum",
-                  style: GoogleFonts.poppins(
-                      color: Colors.black87,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Size",
-                    style: GoogleFonts.poppins(
-                        color: Colors.black87,
-                        fontSize: 22,
-                        fontWeight: FontWeight.w600),
-                  ),
-                  Text(
-                    "Size Guide",
-                    style: GoogleFonts.poppins(
-                        color: Colors.black38,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w400),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    alignment: Alignment.center,
-                    height: 50,
-                    width: 50,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
-                      color: Colors.black12,
-                    ),
-                    child: Text(
-                      "39",
-                      style: GoogleFonts.poppins(
-                          color: Colors.black87,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500),
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
-                      color: Colors.black12,
-                    ),
-                    alignment: Alignment.center,
-                    height: 50,
-                    width: 50,
-                    child: Text(
-                      "40",
-                      style: GoogleFonts.poppins(
-                          color: Colors.black87,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500),
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
-                      color: Colors.black12,
-                    ),
-                    alignment: Alignment.center,
-                    height: 50,
-                    width: 50,
-                    child: Text(
-                      "41",
-                      style: GoogleFonts.poppins(
-                          color: Colors.black87,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500),
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
-                      color: Colors.black12,
-                    ),
-                    alignment: Alignment.center,
-                    height: 50,
-                    width: 50,
-                    child: Text(
-                      "42",
-                      style: GoogleFonts.poppins(
-                          color: Colors.black87,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 25,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Review",
-                    style: GoogleFonts.poppins(
-                        color: Colors.black87,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600),
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30.0),
-                      color: Colors.black12,
-                    ),
-                    height: 40,
-                    width: 40,
-                    child: Image.asset('images/foto1.png'),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30.0),
-                      color: Colors.black12,
-                    ),
-                    height: 40,
-                    width: 40,
-                    child: Image.asset('images/foto2.png'),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30.0),
-                      color: Colors.black12,
-                    ),
-                    height: 40,
-                    width: 40,
-                    child: Image.asset('images/foto3.png'),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30.0),
-                      color: Colors.black12,
-                    ),
-                    height: 40,
-                    width: 40,
-                    child: Image.asset('images/foto4.png'),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              RaisedButton(
-                onPressed: () {
-                  signOutGoogle();
-                  Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (context) {
-                    return Started();
-                  }), ModalRoute.withName('/'));
-                },
-                color: Colors.deepPurple,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    'Sign Out',
-                    style: TextStyle(fontSize: 25, color: Colors.white),
-                  ),
-                ),
-                elevation: 5,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(40)),
-              )
-            ],
-          ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

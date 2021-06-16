@@ -2,20 +2,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:uas_mobile/auth/sign_in.dart';
+import 'package:uas_mobile/screens/add_screen2.dart';
+import 'package:uas_mobile/pages/detail.dart';
 import 'package:uas_mobile/pages/started.dart';
 import 'package:uas_mobile/custom/custom_colors.dart';
-import 'package:uas_mobile/screens/add_screen.dart';
+import 'package:uas_mobile/widgets/bottom_nav_bar2.dart';
 
-import 'package:uas_mobile/widgets/bottom_nav_bar.dart';
-
-import 'package:uas_mobile/widgets/item_list.dart';
-
-class DashboardScreen extends StatefulWidget {
+class DetailScreen extends StatefulWidget {
   @override
-  _DashboardScreenState createState() => _DashboardScreenState();
+  _DetailScreenState createState() => _DetailScreenState();
 }
 
-class _DashboardScreenState extends State<DashboardScreen> {
+class _DetailScreenState extends State<DetailScreen> {
   final FirebaseAuth auth = FirebaseAuth.instance;
 
   @override
@@ -29,7 +27,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         title: Container(
           margin: EdgeInsets.only(left: 22),
           child: Text(
-            "List Item",
+            "List Detail Item",
             style: GoogleFonts.poppins(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -92,12 +90,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       color: CustomColors.text),
                 ),
                 onTap: () {
+                  // onPressed: () {
                   signOutGoogle();
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(builder: (context) {
                     return Started();
                   }), ModalRoute.withName('/'));
                 },
+                // },
               ),
             ],
           ),
@@ -107,17 +107,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => AddScreen()),
+            MaterialPageRoute(builder: (context) => AddScreen2()),
           );
         },
         backgroundColor: CustomColors.firebaseGrey,
         child: Icon(Icons.add, size: 50),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomNavBar(),
+      bottomNavigationBar: BottomNavBar2(),
       body: SafeArea(
-        child: ItemList(),
+        child: Detail(),
       ),
+      // ),
     );
   }
 }

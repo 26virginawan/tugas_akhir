@@ -2,27 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:uas_mobile/custom/custom_colors.dart';
 import 'package:uas_mobile/utils/database.dart';
 import 'package:uas_mobile/widgets/app_bar_title.dart';
-import 'package:uas_mobile/widgets/edit_item_form.dart';
+import 'package:uas_mobile/widgets/edit_order_form.dart';
 
-class EditScreen extends StatefulWidget {
-  final String currentTitle;
-  final String currentDescription;
+class EditScreen2 extends StatefulWidget {
+  final String currentBrand;
+  final String currentColor;
+  final String currentStok;
   final String documentId;
+  final String currentPrice;
 
-  EditScreen({
-    this.currentTitle,
-    this.currentDescription,
+  EditScreen2({
+    this.currentBrand,
+    this.currentColor,
+    this.currentStok,
+    this.currentPrice,
     this.documentId,
   });
 
   @override
-  _EditScreenState createState() => _EditScreenState();
+  _EditScreen2State createState() => _EditScreen2State();
 }
 
-class _EditScreenState extends State<EditScreen> {
-  final FocusNode _titleFocusNode = FocusNode();
+class _EditScreen2State extends State<EditScreen2> {
+  final FocusNode _brandFocusNode = FocusNode();
 
-  final FocusNode _descriptionFocusNode = FocusNode();
+  final FocusNode _colorFocusNode = FocusNode();
+
+  final FocusNode _stokFocusNode = FocusNode();
+
+  final FocusNode _priceFocusNode = FocusNode();
 
   bool _isDeleting = false;
 
@@ -30,8 +38,8 @@ class _EditScreenState extends State<EditScreen> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        _titleFocusNode.unfocus();
-        _descriptionFocusNode.unfocus();
+        _brandFocusNode.unfocus();
+        _colorFocusNode.unfocus();
       },
       child: Scaffold(
         backgroundColor: CustomColors.firebaseNavy,
@@ -86,12 +94,16 @@ class _EditScreenState extends State<EditScreen> {
                 right: 16.0,
                 bottom: 20.0,
               ),
-              child: EditItemForm(
+              child: EditOrderForm(
                 documentId: widget.documentId,
-                titleFocusNode: _titleFocusNode,
-                descriptionFocusNode: _descriptionFocusNode,
-                currentTitle: widget.currentTitle,
-                currentDescription: widget.currentDescription,
+                brandFocusNode: _brandFocusNode,
+                colorFocusNode: _colorFocusNode,
+                stokFocusNode: _stokFocusNode,
+                priceFocusNode: _priceFocusNode,
+                currentBrand: widget.currentBrand,
+                currentColor: widget.currentColor,
+                currentStok: widget.currentStok,
+                currentprice: widget.currentPrice,
               ),
             ),
           ),

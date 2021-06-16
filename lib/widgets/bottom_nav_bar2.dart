@@ -4,7 +4,7 @@ import 'package:uas_mobile/screens/detail_screen.dart';
 import 'package:uas_mobile/custom/custom_colors.dart';
 import 'package:uas_mobile/screens/dashboard_screen.dart';
 
-class BottomNavBar extends StatelessWidget {
+class BottomNavBar2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
@@ -33,7 +33,7 @@ class BottomNavBar extends StatelessWidget {
                       iconSize: 35,
                       icon: Icon(
                         Icons.home_outlined,
-                        color: CustomColors.text,
+                        color: Colors.grey[300],
                       ),
                       onPressed: () {
                         Navigator.push(
@@ -46,7 +46,7 @@ class BottomNavBar extends StatelessWidget {
                     Text(
                       "Home",
                       style: GoogleFonts.poppins(
-                          color: CustomColors.text,
+                          color: Colors.grey[300],
                           fontSize: 13,
                           fontWeight: FontWeight.w600),
                     )
@@ -61,7 +61,7 @@ class BottomNavBar extends StatelessWidget {
                 children: <Widget>[
                   IconButton(
                     icon: Icon(Icons.format_indent_decrease_outlined),
-                    color: Colors.grey[300],
+                    color: CustomColors.text,
                     onPressed: () {
                       Navigator.push(
                         context,
@@ -72,7 +72,7 @@ class BottomNavBar extends StatelessWidget {
                   Text(
                     "Detail",
                     style: GoogleFonts.poppins(
-                        color: Colors.grey[300],
+                        color: CustomColors.text,
                         fontSize: 13,
                         fontWeight: FontWeight.w600),
                   )

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:uas_mobile/auth/login_page.dart';
-import 'package:uas_mobile/home.dart';
-import 'package:uas_mobile/res/custom_colors.dart';
+import 'package:uas_mobile/custom/custom_colors.dart';
 
 class Started extends StatefulWidget {
   @override
@@ -13,7 +12,7 @@ class StartedState extends State<Started> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: CustomColors.background,
       body: Center(
         child: Column(
           children: <Widget>[
@@ -54,7 +53,6 @@ class StartedState extends State<Started> {
               margin: EdgeInsets.only(left: 70),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
-                // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Branded',
@@ -79,7 +77,6 @@ class StartedState extends State<Started> {
             Container(
               margin: EdgeInsets.only(top: 10),
               child: Column(
-                // mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
@@ -108,7 +105,6 @@ class StartedState extends State<Started> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
               ),
-              //membuat button login untuk lanjut kehalaman berikutnya
               child: FlatButton(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0),
@@ -124,8 +120,6 @@ class StartedState extends State<Started> {
                       fontWeight: FontWeight.w500,
                       color: Colors.white),
                 ),
-                // untuk berpindah ke halaman selanjutnya
-                // onPressed: () {},
                 onPressed: () async {
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => LoginPage()));

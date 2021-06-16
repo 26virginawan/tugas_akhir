@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:uas_mobile/pages/detail.dart';
 import 'package:uas_mobile/pages/started.dart';
-import 'package:uas_mobile/res/custom_colors.dart';
+import 'package:uas_mobile/custom/custom_colors.dart';
 import 'package:uas_mobile/screens/dashboard_screen.dart';
 import 'package:uas_mobile/widgets/bottom_nav_bar.dart';
 
@@ -143,14 +144,23 @@ class HomeState extends State<Home> {
                   child: Row(
                     children: [
                       Container(
-                        padding: EdgeInsets.only(left: 20),
-                        height: 330,
+                        padding: EdgeInsets.only(left: 15),
+                        margin: EdgeInsets.only(top: 5, bottom: 5, left: 5),
+                        height: 340,
                         width: 200,
                         // color: Colors.blueAccent,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20.0),
-                          color: CustomColors.googleBackground,
-                        ),
+                            borderRadius: BorderRadius.circular(20.0),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.3),
+                                spreadRadius: 1,
+                                blurRadius: 3,
+                                offset:
+                                    Offset(0, 1), // changes position of shadow
+                              ),
+                            ]),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -158,7 +168,7 @@ class HomeState extends State<Home> {
                             Text(
                               "Nike",
                               style: GoogleFonts.poppins(
-                                  color: Colors.white,
+                                  color: CustomColors.text,
                                   fontSize: 18,
                                   fontWeight: FontWeight.w500),
                             ),
@@ -168,7 +178,7 @@ class HomeState extends State<Home> {
                             Text(
                               "Air Max 270",
                               style: GoogleFonts.poppins(
-                                  color: Colors.white,
+                                  color: CustomColors.text,
                                   fontSize: 23,
                                   fontWeight: FontWeight.bold),
                             ),
@@ -176,7 +186,7 @@ class HomeState extends State<Home> {
                             Text(
                               "Rp.899.000",
                               style: GoogleFonts.poppins(
-                                  color: Colors.white,
+                                  color: CustomColors.text,
                                   fontSize: 18,
                                   fontWeight: FontWeight.w500),
                             ),
@@ -186,37 +196,57 @@ class HomeState extends State<Home> {
                               height: 170,
                               width: 250,
                             ),
-                            // SizedBox(height: 20),
-                            // Container(
-                            //   color: Colors.blue,
-                            //   padding: EdgeInsets.only(left: 90),
-                            //   child: ElevatedButton(
-                            //       child: Icon(
-                            //         Icons.arrow_right_alt_outlined,
-                            //         size: 50,
-                            //         color: Colors.white,
-                            //       ),
-                            //       onPressed: () {
-                            //         Navigator.push(
-                            //           context,
-                            //           MaterialPageRoute(
-                            //               builder: (context) => Detail()),
-                            //         );
-                            //       }),
-                            // ),
+                            // SizedBox(height: 10),
+                            Container(
+                              // color: Colors.blue,
+                              height: 40,
+                              width: 90,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: CustomColors.firebaseGrey,
+                              ),
+                              margin: EdgeInsets.only(left: 85, top: 20),
+                              child: TextButton(
+                                  child: Text(
+                                    "view",
+                                    style: GoogleFonts.poppins(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Detail()),
+                                    );
+                                  }),
+                            ),
                           ],
                         ),
                       ),
                       SizedBox(width: 20),
                       Container(
-                        padding: EdgeInsets.only(left: 20),
-                        height: 330,
+                        padding: EdgeInsets.only(
+                          left: 15,
+                        ),
+                        margin: EdgeInsets.only(
+                            top: 5, bottom: 5, left: 5, right: 20),
+                        height: 340,
                         width: 200,
                         // color: Colors.blueAccent,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20.0),
-                          color: CustomColors.firebaseAmber,
-                        ),
+                            borderRadius: BorderRadius.circular(20.0),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.3),
+                                spreadRadius: 1,
+                                blurRadius: 3,
+                                offset:
+                                    Offset(0, 1), // changes position of shadow
+                              ),
+                            ]),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -224,7 +254,7 @@ class HomeState extends State<Home> {
                             Text(
                               "Nike",
                               style: GoogleFonts.poppins(
-                                  color: Colors.white,
+                                  color: CustomColors.text,
                                   fontSize: 18,
                                   fontWeight: FontWeight.w500),
                             ),
@@ -234,7 +264,7 @@ class HomeState extends State<Home> {
                             Text(
                               "Men's Air Max",
                               style: GoogleFonts.poppins(
-                                  color: Colors.white,
+                                  color: CustomColors.text,
                                   fontSize: 23,
                                   fontWeight: FontWeight.bold),
                             ),
@@ -242,7 +272,7 @@ class HomeState extends State<Home> {
                             Text(
                               "Rp.699.000",
                               style: GoogleFonts.poppins(
-                                  color: Colors.white,
+                                  color: CustomColors.text,
                                   fontSize: 18,
                                   fontWeight: FontWeight.w500),
                             ),
@@ -254,12 +284,29 @@ class HomeState extends State<Home> {
                             ),
                             // SizedBox(height: 20),
                             Container(
-                              margin: EdgeInsets.only(left: 120),
-                              child: Icon(
-                                Icons.arrow_right_alt_outlined,
-                                size: 50,
-                                color: Colors.white,
+                              // color: Colors.blue,
+                              height: 40,
+                              width: 90,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: CustomColors.firebaseGrey,
                               ),
+                              margin: EdgeInsets.only(left: 85, top: 20),
+                              child: TextButton(
+                                  child: Text(
+                                    "view",
+                                    style: GoogleFonts.poppins(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Detail()),
+                                    );
+                                  }),
                             ),
                           ],
                         ),

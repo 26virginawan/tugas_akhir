@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:uas_mobile/res/custom_colors.dart';
+import 'package:uas_mobile/custom/custom_colors.dart';
 
 class AppBarTitle extends StatelessWidget {
   @override
@@ -9,10 +9,6 @@ class AppBarTitle extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        // Image.asset(
-        //   'assets/firebase_logo.png',
-        //   height: 20,
-        // ),
         SizedBox(width: 8),
         Text(
           ' Shoes',
